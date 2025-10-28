@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/main.css" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>{{ pageTitle|default('Ticketly App') }}</title>
+</head>
+<body class="bg-gray-100">
+
+    <div class="w-full max-w-[1440px] mx-auto">
+
+        <div class="flex h-screen overflow-hidden bg-gray-100">
+
+           
+            {% include 'partials/sidebar.twig' with { 'id': 'app-sidebar' } %}
+
+            <div class="flex-1 flex flex-col overflow-hidden">
+
+
+                {% include 'partials/header.twig' with { 'id': 'app-header' } %}
+
+                <main id="main-content" class="flex-1 overflow-auto p-6 md:p-8">
+                    {% block app_content %}{% endblock %}
+                </main>
+
+            </div> 
+        </div> 
+
+    </div> 
+
+    
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script src="/js/authGuard.js"></script> 
+    <script src="/js/appLayout.js"></script> 
+
+    {% block app_scripts %}{% endblock %}
+
+</body>
+</html>

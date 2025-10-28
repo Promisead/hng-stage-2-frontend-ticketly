@@ -1,0 +1,26 @@
+{% extends "layouts/app_layout.twig" %}
+
+{% block app_content %}
+    <div class="space-y-6">
+        <div class="flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-ticketly-green">Manage Tickets</h1>
+            <button id="toggle-form-button"
+                    class="flex items-center px-4 py-2 rounded-md text-white font-medium shadow-md transition-colors bg-ticketly-orange hover:bg-opacity-80">
+                <span id="toggle-form-icon">+</span>
+                <span id="toggle-form-text" class="ml-1">Create Ticket</span>
+            </button>
+        </div>
+
+        <div id="ticket-form-container" class="hidden">
+            <p>Loading form...</p>
+        </div>
+
+        <div id="ticket-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <p class="text-gray-500 col-span-3 italic">Loading tickets...</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_scripts %}
+    <script src="/js/tickets.js"></script>
+{% endblock %}

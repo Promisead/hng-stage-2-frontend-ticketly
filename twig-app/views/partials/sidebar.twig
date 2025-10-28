@@ -1,0 +1,31 @@
+<div id="{{ id|default('app-sidebar') }}"
+     class="flex-shrink-0 bg-ticketly-green text-white flex flex-col transition-all duration-300 ease-in-out w-20 data-[open=true]:w-60"
+     data-open="false">
+
+    <button id="sidebar-toggle-button"
+            class="text-gray-300 hover:text-ticketly-orange focus:outline-none m-[1rem_auto] w-fit"
+            aria-label="Toggle sidebar">
+        <span class="icon-closed">&#9776;</span>
+        <span class="icon-open hidden">&#10005;</span>
+    </button>
+
+    <nav class="flex-1 overflow-y-auto p-4 space-y-2">
+        <a href="/dashboard"
+           class="nav-link flex items-center p-3 rounded-lg text-gray-300 hover:bg-green-800 hover:text-white justify-center data-[open=true]:justify-start"
+           data-open="false">
+            <span class="icon">&#127968;</span>
+            <span class="link-text ml-4 font-medium transition-opacity opacity-0 absolute data-[open=true]:opacity-100 data-[open=true]:relative">
+                Dashboard
+            </span>
+        </a>
+
+         <a href="/tickets"
+           class="nav-link flex items-center p-3 rounded-lg text-gray-300 hover:bg-green-800 hover:text-white justify-center data-[open=true]:justify-start"
+           data-open="false">
+             <span class="icon">&#127915;</span>
+            <span class="link-text ml-4 font-medium transition-opacity opacity-0 absolute data-[open=true]:opacity-100 data-[open=true]:relative">
+                Tickets
+            </span>
+        </a>
+    </nav>
+</div>

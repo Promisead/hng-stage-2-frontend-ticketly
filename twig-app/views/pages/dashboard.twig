@@ -1,0 +1,48 @@
+{% extends "layouts/app_layout.twig" %}
+
+{% block app_content %}
+<div class="flex flex-col min-h-screen">
+	<main class="flex-grow space-y-8">
+		<div class="flex justify-between items-center">
+			<div>
+				<h1
+					id="page-title-placeholder"
+					class="sm:text-3xl text-[1.2rem] font-bold text-ticketly-green"
+				>
+					Dashboard
+				</h1>
+				<p class="mt-1 text-gray-600">Here's a summary of your tickets.</p>
+			</div>
+			<a
+				href="/tickets"
+				class="px-5 py-2 font-medium text-white bg-ticketly-orange rounded-lg shadow-md hover:bg-opacity-80 transition-colors"
+			>
+				<span class="sm:inline hidden">Manage Tickets</span>
+				<span class="sm:hidden inline">+</span>
+			</a>
+		</div>
+
+		<div
+			id="stat-cards"
+			class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+		>
+			<p class="text-gray-500 italic">Loading stats...</p>
+		</div>
+
+		<div id="status-breakdown" class="p-6 bg-white rounded-lg shadow">
+			<h2 class="text-xl font-semibold text-ticketly-green mb-4">
+				Status Breakdown
+			</h2>
+			<div class="flex items-end h-40 space-x-4">
+				<p class="text-gray-500 italic">Loading chart...</p>
+			</div>
+		</div>
+	</main>
+
+	{% include "partials/footer.twig" %}
+</div>
+{% endblock %}
+
+{% block app_scripts %}
+<script src="/js/dashboard.js"></script>
+{% endblock %}

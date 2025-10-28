@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+	/* Replace orange with cyan */
+	--color-ticketly-orange: oklch(0.72 0.15 210); /* cyan tone (#06b6d4) */
+
+	/* Replace green with deep blue */
+	--color-ticketly-green: oklch(0.45 0.08 255); /* dark blue tone (#0f172a) */
+}

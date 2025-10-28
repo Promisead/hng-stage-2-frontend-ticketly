@@ -1,0 +1,109 @@
+{% extends "layouts/main.twig" %}
+
+{% block content %}
+    <div class="flex items-center justify-center min-h-screen bg-gray-100 relative px-4 sm:px-0">
+        <a href="/" class="absolute top-6 left-6 md:top-8 md:left-8 text-gray-500 hover:text-ticketly-orange transition-colors" aria-label="Go back home">
+           &larr; Back
+        </a>
+        <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
+            <div class="text-center">
+                <h1 class="text-3xl font-bold text-ticketly-green">Welcome Back to Ticketly</h1>
+                <p class="mt-2 text-gray-600">							Please sign in to your account.
+</p>
+            </div>
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    <input id="email" name="email" type="email" required class="w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-ticketly-orange focus:border-ticketly-orange border-gray-300"/>
+                    <p id="email-error" class="mt-1 text-xs text-red-500 h-4"></p>
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input id="password" name="password" type="password" required class="w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-ticketly-orange focus:border-ticketly-orange border-gray-300"/>
+                    <p id="password-error" class="mt-1 text-xs text-red-500 h-4"></p>
+                </div>
+                <div>
+                    <button type="submit" class="w-full px-4 py-2 font-medium text-white bg-ticketly-orange rounded-md hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-ticketly-orange focus:ring-offset-2 transition-colors">
+                        Sign In
+                    </button>
+                </div>
+            </form>
+            <p class="text-sm text-center text-gray-600">
+                Don't have an account?
+                <a href="/auth/signup" class="font-medium text-ticketly-orange hover:underline">Sign up</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailError = document.getElementById('email-error');
+        const passwordError = document.getElementById('password-error');
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            console.log("Login form submitted");
+            emailError.textContent = '';
+            passwordError.textContent = '';
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (!email || !password) {
+                if (!email) emailError.textContent = 'Email is required';
+                if (!password) passwordError.textContent = 'Password is required';
+                return;
+            }
+
+            const storedUserString = localStorage.getItem('ticketapp_user');
+            console.log("Value of storedUserString:", storedUserString);
+
+            if (!storedUserString || storedUserString === 'undefined' || storedUserString === 'null') {
+                console.error("No user found in localStorage or value is invalid.");
+                Toastify({
+                    text: "No account found. Please sign up.",
+                    duration: 3000,
+                    gravity: "bottom",
+                    position: "right",
+                    style: { background: "linear-gradient(to right, #ff5f6d, #ffc371)" }
+                }).showToast();
+                passwordError.textContent = 'No account found.';
+                return;
+            }
+
+            let storedUser;
+            try {
+                storedUser = JSON.parse(storedUserString);
+                console.log("Parsed stored user:", storedUser);
+                if (!storedUser || typeof storedUser !== 'object' || !storedUser.email || !storedUser.password) {
+                    throw new Error("Stored user data is incomplete or invalid.");
+                }
+            } catch (e) {
+                console.error("Error parsing stored user data:", e);
+                Toastify({ text: "Error reading user data.", duration: 3000, gravity: "bottom", position: "right", style: { background: "linear-gradient(to right, #ff5f6d, #ffc371)" }}).showToast();
+                passwordError.textContent = 'Failed to read stored user.';
+                return;
+            }
+
+            if (storedUser.email === email && storedUser.password === password) {
+                console.log("Credentials match!");
+                const mockToken = `mock-token-${Date.now()}`;
+                localStorage.setItem('ticketapp_session', mockToken);
+                Toastify({ text: "Login Successful! Redirecting...", duration: 2000, gravity: "bottom", position: "right", style: { background: "linear-gradient(to right, #00b09b, #96c93d)" }}).showToast();
+                setTimeout(() => { window.location.href = '/dashboard'; }, 1500);
+            } else {
+                console.log("Credentials do not match.");
+                Toastify({ text: "Invalid email or password.", duration: 3000, gravity: "bottom", position: "right", style: { background: "linear-gradient(to right, #ff5f6d, #ffc371)" }}).showToast();
+                passwordError.textContent = 'Invalid email or password.';
+            }
+        });
+    });
+
+
+</script>
+{% endblock %}

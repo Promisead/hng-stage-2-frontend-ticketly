@@ -1,0 +1,27 @@
+{
+	"name": "twig-app",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js",
+		"dev": "concurrently \"npm run watch:css\" \"nodemon server.js\"",
+		"build:css": "npx tailwindcss -i ./src/input.css -o ./public/assets/main.css",
+		"watch:css": "npx tailwindcss -i ./src/input.css -o ./public/assets/main.css --watch"
+	},
+	"keywords": [],
+	"author": "promise",
+	"license": "ISC",
+	"type": "module",
+	"dependencies": {
+		"express": "^5.1.0",
+		"twig": "^1.17.1"
+	},
+	"devDependencies": {
+		"autoprefixer": "^10.4.21",
+		"concurrently": "^9.2.1",
+		"nodemon": "^3.1.10",
+		"postcss": "^8.5.6",
+		"tailwindcss": "^3.4.18"
+	}
+}

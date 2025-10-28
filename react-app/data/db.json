@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "user@example.com",
+      "password": "password123",
+      "name": "Test User"
+    },
+    {
+      "id": "ff2f",
+      "name": "ugspoony148",
+      "email": "ugspoony148@gmail.com",
+      "password": "password"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "1",
+      "title": "Fix homepage CSS bug",
+      "description": "The hero section is not centered on mobile.",
+      "status": "open",
+      "userId": 1
+    },
+    {
+      "id": "2",
+      "title": "Implement login API",
+      "description": "Connect login form to the backend.",
+      "status": "in_progress",
+      "userId": 1
+    }
+  ]
+}
